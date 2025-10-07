@@ -13,7 +13,7 @@ import {
 } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
-import { auth } from "../../Firebase/firebase.config";
+import { auth } from "../Firebase/firebase.config";
 
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();

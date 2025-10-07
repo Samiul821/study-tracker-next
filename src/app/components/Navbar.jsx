@@ -2,11 +2,20 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FiMenu, FiX } from "react-icons/fi";
-import { FaBook } from "react-icons/fa"; // Book icon
+import { FaBook } from "react-icons/fa";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  const linkClasses = (path) =>
+    `transition-colors ${
+      pathname === path
+        ? "text-indigo-600 font-medium"
+        : "text-gray-600 hover:text-indigo-600"
+    }`;
 
   return (
     <nav className="fixed top-0 w-full bg-white shadow-md z-50 font-sans">
@@ -18,22 +27,16 @@ export default function Navbar() {
               <FaBook size={18} />
             </div>
             <span className="text-xl font-semibold text-gray-800">
-              StudyTraker
+              StudyTracker
             </span>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-6">
-            <Link
-              href="/dashboard"
-              className="text-gray-600 hover:text-indigo-600 transition-colors"
-            >
+            <Link href="/dashboard" className={linkClasses("/dashboard")}>
               Dashboard
             </Link>
-            <Link
-              href="/login"
-              className="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors"
-            >
+            <Link href="/login" className={linkClasses("/login")}>
               Login
             </Link>
             <Link
@@ -60,10 +63,7 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden bg-white border-t border-gray-200 shadow-lg">
           <div className="px-4 py-3 space-y-3">
-            <Link
-              href="/dashboard"
-              className="block text-gray-700 hover:text-indigo-600 transition-colors"
-            >
+            <Link href="/dashboard" className={linkClasses("/dashboard")}>
               Dashboard
             </Link>
             <Link
